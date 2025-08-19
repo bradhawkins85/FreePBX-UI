@@ -91,7 +91,10 @@ echo "==> Fetch & build Asterisk ${AST_VER} (LTS)"
 cd "${BUILD_DIR}"
 wget -q "http://downloads.asterisk.org/pub/telephony/asterisk/${AST_TARBALL}"
 tar xzf "${AST_TARBALL}"
-cd ${AST_SRC_DIR}
+
+# Find the extracted directory (handles symlinks or versioned dirs)
+AST_SRC_DIR=$(find "${BUILD_DIR}" -maxdepth 1 -type d -name "asterisk-${AST_VER}*" | head -n 1)
+cd "${AST_SRC_DIR}"
 
 echo "==> Install Asterisk prerequisites"
 contrib/scripts/install_prereq install
