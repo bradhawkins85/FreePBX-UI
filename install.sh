@@ -87,7 +87,8 @@ maxretry = 6
 enabled  = true
 port     = 5060,5061
 protocol = all
-logpath  = /var/log/asterisk/full
+#logpath  = /var/log/asterisk/full
+journalmatch = _COMM=asterisk
 backend  = auto
 maxretry = 6
 findtime = 10m
