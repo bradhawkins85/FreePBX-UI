@@ -132,7 +132,20 @@ echo "==> Start Asterisk for FreePBX install"
 
 echo "==> Install FreePBX (non-interactive)"
 # Composer is bundled in FreePBX installer; ensure PHP 8.2 is used
-/usr/bin/php8.2 ./install -n
+echo "==> Install FreePBX (non-interactive, explicit paths)"
+/usr/bin/php8.2 ./install -n \
+  --webroot /var/www/html \
+  --user asterisk --group asterisk \
+  --astetcdir /etc/asterisk \
+  --astmoddir /usr/lib/asterisk/modules \
+  --astvarlibdir /var/lib/asterisk \
+  --astagidir /var/lib/asterisk/agi-bin \
+  --astspooldir /var/spool/asterisk \
+  --astrundir /var/run/asterisk \
+  --astlogdir /var/log/asterisk
+
+echo "==> Post-install tidy"
+fwconsole chown
 
 echo "==> Fix ownership of web root"
 chown -R ${AST_USER}:${AST_GROUP} /var/www/html
