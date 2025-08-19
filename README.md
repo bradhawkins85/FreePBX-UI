@@ -2,6 +2,19 @@
 
 A lightweight React front‑end for managing a FreePBX 17 installation. It provides extension management, call log browsing, realtime queue/trunk status and an audit trail. The app ships with a mock mode so it can be explored without a live PBX.
 
+## Installation
+
+The repository includes an `install.sh` script that provisions everything needed to run the UI on Ubuntu 24.04.
+Run it as root (or via `sudo`) from the project directory:
+
+```bash
+sudo bash install.sh
+```
+
+The script will install Node.js 18, PM2, and FreePBX/Asterisk (if missing), then fetch the UI
+dependencies and start the development server under PM2 on port `5173`.
+After it completes, visit `http://<server-ip>:5173` in your browser.
+
 ## Development
 
 ### Prerequisites
