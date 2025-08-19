@@ -55,6 +55,9 @@ ufw allow 10000:20000/udp comment 'RTP range'
 echo "y" | ufw enable
 ufw status verbose
 
+#Create Fail2Ban Asterisk Log
+touch /var/log/asterisk/full
+
 # Configure Fail2Ban
 cat <<'JAIL' >/etc/fail2ban/jail.local
 [DEFAULT]
