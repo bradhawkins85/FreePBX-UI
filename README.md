@@ -12,8 +12,8 @@ sudo bash install.sh
 ```
 
 The script will install Node.js 18, PM2, and FreePBX/Asterisk (if missing), then fetch the UI
-dependencies and start the development server under PM2 on port `5173`.
-After it completes, visit `http://<server-ip>:5173` in your browser.
+dependencies and start the development server under PM2 on port `5137`.
+After it completes, visit `http://<server-ip>:5137` in your browser.
 
 ## Development
 
@@ -26,7 +26,7 @@ After it completes, visit `http://<server-ip>:5173` in your browser.
 npm install
 npm run dev
 ```
-This starts Vite's dev server on <http://localhost:5173>. Tailwind is loaded via CDN so no extra build steps are required.
+This starts Vite's dev server on `http://0.0.0.0:5137`, making it accessible from other machines at `http://<server-ip>:5137`. Tailwind is loaded via CDN so no extra build steps are required.
 
 ### Build for production
 ```bash
