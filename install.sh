@@ -57,6 +57,24 @@ ufw status verbose
 
 #Create Fail2Ban Asterisk Log
 touch /var/log/asterisk/full
+sudo systemctl stop fail2ban
+sudo pkill -f fail2ban-server || true
+
+# Remove any leftover sockets (both legacy and current locations)
+sudo rm -f /var/run/fail2ban/fail2ban.sock
+sudo rm -f /run/fail2ban/fail2ban.sock
+
+sudo mkdir -p /run/fail2ban
+sudo chown root:root /run/fail2ban
+sudo chmod 0755 /run/fail2ban
+
+sudo sed -i \
+  -e 's|^socket *=.*|socket = /run/fail2ban/fail2ban.sock|' \
+  -e 's|^pidfile *=.*|pidfile = /run/fail2ban/fail2ban.pid|' \
+  /etc/fail2ban/fail2ban.conf
+
+sudo systemctl enable --now fail2ban
+sudo systemctl restart fail2ban
 
 # Configure Fail2Ban
 cat <<'JAIL' >/etc/fail2ban/jail.local
